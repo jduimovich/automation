@@ -32,4 +32,4 @@ jobs:
           echo "Eclipse API Query"
           STATUS=$(curl https://api.eclipse.org/account/profile/${{github.event.pull_request.user.login}}) 
           echo "Eclipse Results"
-          cat $STATUS | jq 
+          echo $STATUS | jq 
