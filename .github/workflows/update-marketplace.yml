@@ -7,8 +7,10 @@ jobs:
     name: Get Changes and Determine if Valid
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2  
-      - uses: lots0logs/gh-action-get-changed-files@2.1.4
+      - name: Checkout Source Code. 
+        uses: actions/checkout@v2  
+      - name: Determine Changed Files. 
+        uses: lots0logs/gh-action-get-changed-files@2.1.4
         id: get_changed_files
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -24,6 +26,9 @@ jobs:
           cat ${HOME}/files_deleted.json
           echo ${HOME}/files_renamed.json
           cat ${HOME}/files_renamed.json 
+      - name: Validate Change. 
+        run: | 
+          echo "Validating Change from ${{github.event.issue.user.login}}"
       - name: Create Pull Request to update changes in repo
         uses: peter-evans/create-pull-request@v3
         with:
