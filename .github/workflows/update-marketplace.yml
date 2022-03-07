@@ -34,7 +34,9 @@ jobs:
           echo "Eclipse Results"
           echo $STATUS | jq 
           SIGNED=$(echo $STATUS | jq '.eca.signed')
-          if [ "$SIGNED" == "yes" ]; then
+
+          echo
+          if [ "$SIGNED" == "true" ]; then
             echo
             echo "User has a signed ECA"  
           fi
@@ -42,4 +44,12 @@ jobs:
           if [ "$COMMITTER" == "true" ]; then
             echo
             echo "User is a committer"  
+          fi
+          NUMBER_OF_FILES_CHANGED=$(jq length files.json)
+          if [ "$NUMBER_OF_FILES_CHANGED" == "1" ]; then 
+            FILE=$(jq '.[0]' files.json)
+            echo "Pull Request has one change in file: $FILE"  
+          else  
+            echo "Error Too Many Changes included in this pull request"  
+            exit -1
           fi
