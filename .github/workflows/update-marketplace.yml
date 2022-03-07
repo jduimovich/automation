@@ -33,3 +33,13 @@ jobs:
           STATUS=$(curl -s https://api.eclipse.org/account/profile/${{github.event.pull_request.user.login}}) 
           echo "Eclipse Results"
           echo $STATUS | jq 
+          SIGNED=$(echo $STATUS | jq '.eca.signed')
+          if [ "$SIGNED" == "yes" ]; then
+            echo
+            echo "User has a signed ECA"  
+          fi
+          COMMITTER=$(echo $STATUS | jq '.is_committer')
+          if [ "$COMMITTER" == "true" ]; then
+            echo
+            echo "User is a committer"  
+          fi
