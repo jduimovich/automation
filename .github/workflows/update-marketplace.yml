@@ -36,13 +36,11 @@ jobs:
           SIGNED=$(echo $STATUS | jq '.eca.signed')
 
           echo
-          if [ "$SIGNED" == "true" ]; then
-            echo
+          if [ "$SIGNED" == "true" ]; then 
             echo "User has a signed ECA"  
           fi
           COMMITTER=$(echo $STATUS | jq '.is_committer')
-          if [ "$COMMITTER" == "true" ]; then
-            echo
+          if [ "$COMMITTER" == "true" ]; then 
             echo "User is a committer"  
           fi
           NUMBER_OF_FILES_CHANGED=$(jq length ${HOME}/files.json)
