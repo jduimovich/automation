@@ -29,8 +29,4 @@ jobs:
       - name: Validate Change. 
         run: | 
           echo "Validating Change from ${{github.event.issue.user.login}}"
-      - name: Create Pull Request to update changes in repo
-        uses: peter-evans/create-pull-request@v3
-        with:
-          title: 'New Marketplace Listing: ${{ github.event.commits[0].message }}'
-          commit-message: 'New Marketplace Listing: ${{ env.TAG }}'
+
