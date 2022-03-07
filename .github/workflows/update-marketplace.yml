@@ -1,0 +1,31 @@
+# Handle Updates to Marketplace in Eclipse
+
+name: Update Marketplace Listing  
+on: [workflow_dispatch]
+jobs:
+  validate-listing:
+    name: Get Changes and Determine if Valid
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2  
+      - uses: lots0logs/gh-action-get-changed-files@2.1.4
+        id: get_changed_files
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Show changed files. 
+        run: | 
+          echo ${HOME}/files.json
+          cat ${HOME}/files.json
+          echo ${HOME}/files_modified.json
+          cat ${HOME}/files_modified.json
+          echo ${HOME}/files_added.json
+          cat ${HOME}/files_added.json
+          echo ${HOME}/files_deleted.json
+          cat ${HOME}/files_deleted.json
+          echo ${HOME}/files_renamed.json
+          cat ${HOME}/files_renamed.json 
+      - name: Create Pull Request to update changes in repo
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: 'New Marketplace Listing: ${{ github.event.commits[0].message }}'
+          commit-message: 'New Marketplace Listing: ${{ env.TAG }}'
