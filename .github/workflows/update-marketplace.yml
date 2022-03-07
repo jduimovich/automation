@@ -27,6 +27,5 @@ jobs:
           echo ${HOME}/files_renamed.json
           cat ${HOME}/files_renamed.json 
       - name: Validate Change. 
-        run: | 
-          echo "${{github.event}}" | jq 
+        run: |  
           echo "Validating Change from ${{github.event.pull_request.user.login}}"
