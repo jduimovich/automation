@@ -7,4 +7,6 @@ git checkout -b auto-$CHANGE
 echo $CHANGE > random.json 
 git add random.json
 git commit -m "auto-update"
-git push origin auto-$CHANGE 
+git push origin auto-$CHANGE
+
+gh pr create -t "test" -b "marketplace-change"
