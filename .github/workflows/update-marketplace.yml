@@ -1,7 +1,7 @@
 # Handle Updates to Marketplace in Eclipse
 
 name: Update Marketplace Listing  
-on: [workflow_dispatch]
+on: [pull_request]
 jobs:
   validate-listing:
     name: Get Changes and Determine if Valid
