@@ -29,3 +29,7 @@ jobs:
       - name: Validate Change. 
         run: |  
           echo "Validating Change from ${{github.event.pull_request.user.login}}"
+          echo "Eclipse API Query"
+          STATUS=$(curl https://api.eclipse.org/account/profile/${{github.event.pull_request.user.login}}) 
+          echo "Eclipse Results"
+          cat $STATUS | jq 
