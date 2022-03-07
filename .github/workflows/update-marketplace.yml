@@ -45,9 +45,9 @@ jobs:
             echo
             echo "User is a committer"  
           fi
-          NUMBER_OF_FILES_CHANGED=$(jq length files.json)
+          NUMBER_OF_FILES_CHANGED=$(jq length ${HOME}/files.json)
           if [ "$NUMBER_OF_FILES_CHANGED" == "1" ]; then 
-            FILE=$(jq '.[0]' files.json)
+            FILE=$(jq '.[0]' ${HOME}/files.json)
             echo "Pull Request has one change in file: $FILE"  
           else  
             echo "Error Too Many Changes included in this pull request"  
