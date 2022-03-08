@@ -28,14 +28,21 @@ jobs:
           cat ${HOME}/files_renamed.json 
       - name: Validate Change. 
         run: |  
-          echo "Validating Change from ${{github.event.pull_request.user.login}}"
+          echo "Validating Change for user: ${{github.event.pull_request.user.login}}"
           echo "Eclipse API Query"
           STATUS=$(curl -s https://api.eclipse.org/account/profile/${{github.event.pull_request.user.login}}) 
           echo "Eclipse Results"
           echo $STATUS | jq 
-          SIGNED=$(echo $STATUS | jq '.eca.signed')
-
           echo
+
+          LENGTH=$(echo $STATUS | jq length)
+          if [ "$LENGTH" == "1" ]; then 
+            ERROR=$(echo $STATUS | jq '.[0]') 
+            echo "Error: %ERROR"
+            exit -1  
+          if 
+
+          SIGNED=$(echo $STATUS | jq '.eca.signed') 
           if [ "$SIGNED" == "true" ]; then 
             echo "User has a signed ECA"  
           fi
