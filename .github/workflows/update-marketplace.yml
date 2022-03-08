@@ -40,7 +40,7 @@ jobs:
             ERROR=$(echo $STATUS | jq '.[0]') 
             echo "Error: %ERROR"
             exit -1  
-          if 
+          fi 
 
           SIGNED=$(echo $STATUS | jq '.eca.signed') 
           if [ "$SIGNED" == "true" ]; then 
